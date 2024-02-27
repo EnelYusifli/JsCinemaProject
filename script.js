@@ -39,9 +39,8 @@ async function paginateAndDisplayMovies(movies) {
     function showItems(page) {
       const startIndex = (page - 1) * itemsPerPage;
       const endIndex = Math.min(startIndex + itemsPerPage, items.length);
-      const itemsContainer = document.querySelector("#items");
-      itemsContainer.innerHTML = "";
-
+      const parent = document.querySelector("#main");
+      parent.innerHTML = "";
       for (let i = startIndex; i < endIndex; i++) {
         const movie = items[i];
         const movieHTML = `
@@ -63,7 +62,7 @@ async function paginateAndDisplayMovies(movies) {
               </div>
             </div>
           </div>`;
-        itemsContainer.innerHTML += movieHTML;
+          parent.innerHTML += movieHTML;
       }
     }
 
