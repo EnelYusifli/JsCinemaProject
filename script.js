@@ -31,7 +31,7 @@ async function paginateAndDisplayMovies(movies) {
                 <li class="list-group-item">Language: ${movie["language"]}</li>
               </ul>
               <div class="card-body">
-                <a href="#" class="btn btn-success btn-sm">Go To Website</a> 
+                <a href="#" class="btn btn-success btn-sm"  onclick="window.location.href='${movie["officialSite"]}'; return false;">Go To Website</a> 
                 <a href="#" class="btn btn-primary btn-sm">Go To Detail</a>
               </div>
             </div>
