@@ -124,7 +124,7 @@ document.querySelector("#search-input").addEventListener("keyup", async function
               </ul>
               <div class="card-body">
               <a href="#" class="btn btn-success btn-sm"  onclick="window.location.href='${movie["officialSite"]}'; return false;">Go To Website</a>
-              <a href="#" class="btn btn-primary btn-sm">Go To Detail</a>
+              <a href="#" class="btn btn-primary btn-sm"  onclick="window.location.href='detail.html?id=${movie["id"]}'; return false;">Go To Detail</a>
               </div>
             </div>
           </div>`;
@@ -140,7 +140,6 @@ document.querySelector("#search-input").addEventListener("keyup", async function
     messagesContainer.innerHTML = htmlContent;
   } catch (error) {
     console.error('Error fetching movies:', error);
-    messagesContainer.innerHTML = "Error fetching movies";
   }
 });
 
