@@ -4,7 +4,7 @@ async function GetMovies(){
     return data;
 }
 async function paginateAndDisplayMovies(movies) {
-  const itemsPerPage = 12;
+  const itemsPerPage = 20;
   const paginationContainer = "#pagination";
 
   async function paginate(items, itemsPerPage, paginationContainer) {
@@ -32,7 +32,7 @@ async function paginateAndDisplayMovies(movies) {
               </ul>
               <div class="card-body">
                 <a href="#" class="btn btn-success btn-sm"  onclick="window.location.href='${movie["officialSite"]}'; return false;">Go To Website</a> 
-                <a href="#" class="btn btn-primary btn-sm">Go To Detail</a>
+                <a href="#" class="btn btn-primary btn-sm"  onclick="window.location.href='detail.html?id=${movie["id"]}'; return false;">Go To Detail</a>
               </div>
             </div>
           </div>`;
@@ -89,7 +89,7 @@ fetchAndDisplayMovies();
 
 
 
-document.querySelector("#search-input").addEventListener("input", async function() {
+document.querySelector("#search-input").addEventListener("keyup", async function() {
   var searchText = this.value.trim().toLowerCase();
   let messagesContainer = document.getElementById("search-messages");
   messagesContainer.innerHTML = "";
@@ -105,8 +105,8 @@ document.querySelector("#search-input").addEventListener("input", async function
 
   try {
     let movies = await GetMovies();
-    let htmlContent = '';
-
+    const parent = document.querySelector("#main");
+      parent.innerHTML = "";
     movies.forEach((movie) => {
       if (movie.name.toLowerCase().includes(searchText)) {
         const movieHTML = `
@@ -123,12 +123,12 @@ document.querySelector("#search-input").addEventListener("input", async function
                 <li class="list-group-item">Language: ${movie.language}</li>
               </ul>
               <div class="card-body">
-                <a href="#" class="btn btn-success btn-sm">Go To Website</a> 
-                <a href="#" class="btn btn-primary btn-sm">Go To Detail</a>
+              <a href="#" class="btn btn-success btn-sm"  onclick="window.location.href='${movie["officialSite"]}'; return false;">Go To Website</a>
+              <a href="#" class="btn btn-primary btn-sm">Go To Detail</a>
               </div>
             </div>
           </div>`;
-        htmlContent += movieHTML;
+          parent.innerHTML += movieHTML;
       }
     });
     
@@ -143,5 +143,4 @@ document.querySelector("#search-input").addEventListener("input", async function
     messagesContainer.innerHTML = "Error fetching movies";
   }
 });
-
 
