@@ -4,9 +4,6 @@ async function GetMovies(){
     return data;
 }
 const paginationContainer = "#pagination";
-async function paginateAndDisplayMovies(movies) {
-  const itemsPerPage = 20;
-
   async function paginate(items, itemsPerPage, paginationContainer) {
     let currentPage = 1;
     const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -47,17 +44,14 @@ async function paginateAndDisplayMovies(movies) {
     async function setupPagination() {
       const pagination = document.querySelector(paginationContainer);
       pagination.innerHTML = "";
-    
       for (let i = 1; i <= totalPages; i++) {
         const link = document.createElement("a");
         link.href = "#";
         link.innerText = i;
         link.classList.add("pagination-link"); 
-        
         if (i === currentPage) {
           link.classList.add("active");
         }
-    
         link.addEventListener("click", async (event) => {
           event.preventDefault();
           currentPage = i;
@@ -72,18 +66,15 @@ async function paginateAndDisplayMovies(movies) {
     showItems(currentPage);
     await setupPagination();
   }
-  await paginate(movies, itemsPerPage, paginationContainer);
-}
 
 async function fetchAndDisplayMovies() {
   try {
     const movies = await GetMovies();
-    await paginateAndDisplayMovies(movies);
+    await paginate(movies,20,paginationContainer);
   } catch (error) {
-    console.error('Error fetching and displaying movies:', error);
+    console.error(error);
   }
 }
-
 fetchAndDisplayMovies();
 
 let form=document.getElementById("submit-form")
@@ -149,7 +140,7 @@ input.addEventListener("keyup", async function() {
       if (movie.name.toLowerCase().includes(searchText)) {
         moviesFound = true;
         const movieHTML = `
-          <div class="col-3">
+          <div class="col-3" data-aos="flip-down">
             <div class="card" style="width:16.5rem; height: 42rem; margin:10px;">
               <img src="${movie.image.medium}" class="card-img-top" alt="...">
               <div class="card-body">
