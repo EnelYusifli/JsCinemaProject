@@ -13,9 +13,12 @@
     </head>
     <body>
         <header>
-            <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+            <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary shadow">
                 <div class="container-fluid" style="width: 80%;">
-                    <a class="navbar-brand" href="index.html"><i class="fas fa-film"></i><b>Cinema</b></a>
+                    <a class="navbar-brand d-flex align-items-baseline" href="index.html">
+                        <i class="fas fa-film me-2" style="font-size: 24px; color: #651717;"></i>
+                        <b style="font-family: 'Roboto', sans-serif; font-size: 24px; color: #333;">Cinema</b>
+                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -31,19 +34,22 @@
                                 <a class="nav-link disabled" aria-disabled="true">Contact</a>
                             </li>
                         </ul>
-                      <form class="d-flex flex-wrap" id="submit-form">
-                        <div class="form-group">
-                            <input class="form-control me-2" type="text" id="search-input" placeholder="Search" aria-label="Search">
-                            <small id="alert-empty" class="text-danger d-none">Do not leave empty!</small>
-                            <small id="alert-length" class="text-danger d-none">Minimum Length is 3!</small>
-                        </div>
-                        <input class="btn btn-outline-success" type="submit" id="search-btn" value="Search"></a>
+                        <form class="d-flex flex-wrap" id="submit-form">
+                            <div class="form-group">
+                                <input class="form-control me-2" type="text" id="search-input" placeholder="Search" aria-label="Search" autocomplete="off">
+                                <small id="alert-empty" class="text-danger d-none">Do not leave empty!</small>
+                                <small id="alert-length" class="text-danger d-none">Minimum Length is 3!</small>
+                            </div>
+                            <input class="btn btn-outline-success" type="submit" id="search-btn" value="Search">
                         </form>
                     </div>
                 </div>
             </nav>
         </header>
-    <main style="margin-top: 20px;">
+        
+        
+        
+    <main style="margin-top: 20px; background-color: whitesmoke;">
         <div class="container" style="position: relative; margin-top:60px;">
             <div class="row" id="main" data-aos="zoom-in-up">
                 
