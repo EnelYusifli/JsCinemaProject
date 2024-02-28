@@ -18,26 +18,30 @@ async function paginateAndDisplayMovies(movies) {
       for (let i = startIndex; i < endIndex; i++) {
         const movie = items[i];
         const movieHTML = `
-          <div class="col-3">
-            <div class="card" style="width:16.5rem; height: 42rem; margin:10px;">
-              <img src="${movie["image"]["medium"]}" class="card-img-top" alt="...">
-              <div class="card-body">
+        <div class="col-3">
+        <div class="card" style="width: 16.5rem; height: 42rem; margin: 10px;">
+            <img src="${movie["image"]["medium"]}" class="card-img-top" alt="...">
+            <div class="card-body">
                 <h5 class="card-title">${movie["name"]}</h5>
                 <p class="card-text">Premiere: ${movie["premiered"]}</p>
-              </div>
-              <ul class="list-group list-group-flush">
+            </div>
+            <ul class="list-group list-group-flush">
                 <li class="list-group-item">IMDB Rating: ${movie["rating"]["average"]}</li>
                 <li class="list-group-item">Genre: ${movie["genres"][0]}</li>
                 <li class="list-group-item">Language: ${movie["language"]}</li>
-              </ul>
-              <div class="card-body">
-                <a href="#" class="btn btn-success btn-sm"  onclick="window.location.href='${movie["officialSite"]}'; return false;">Go To Website</a> 
-                <a href="#" class="btn btn-primary btn-sm"  onclick="window.location.href='detail.html?id=${movie["id"]}'; return false;">Go To Detail</a>
-              </div>
+            </ul>
+            <div class="card-body d-flex justify-content-center"> <!-- Center align buttons -->
+                <a href="#" class="btn btn-success btn-sm m-2" onclick="window.location.href='${movie["officialSite"]}'; return false;">Go To Website</a>
+                <a href="#" class="btn btn-primary btn-sm m-2" onclick="window.location.href='detail.html?id=${movie["id"]}'; return false;">Go To Detail</a>
             </div>
-          </div>`;
+        </div>
+    </div>
+    `;
           parent.innerHTML += movieHTML;
       }
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'})
     }
 
     async function setupPagination() {
@@ -102,6 +106,7 @@ form.onsubmit=function(e) {
     btn.value="Go Back To HomePage"
     btn.onclick=function() {
       window.location.href = 'index.html';
+      input.value="";
     }
   }
   setTimeout(function(){
@@ -175,5 +180,13 @@ input.addEventListener("keyup", async function() {
   } catch (error) {
     console.error('Error fetching movies:', error);
   }
+});
+document.addEventListener('DOMContentLoaded', function() {
+  AOS.init({
+      duration: 1000,
+      easing: 'ease',
+      offset: 100,
+      once: true
+  });
 });
 
