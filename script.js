@@ -3,9 +3,9 @@ async function GetMovies(){
     let data= await res.json();
     return data;
 }
+const paginationContainer = "#pagination";
 async function paginateAndDisplayMovies(movies) {
   const itemsPerPage = 20;
-  const paginationContainer = "#pagination";
 
   async function paginate(items, itemsPerPage, paginationContainer) {
     let currentPage = 1;
@@ -62,16 +62,12 @@ async function paginateAndDisplayMovies(movies) {
           currentActive.classList.remove("active");
           link.classList.add("active");
         });
-    
         pagination.appendChild(link);
       }
     }
-    
-
     showItems(currentPage);
     await setupPagination();
   }
-
   await paginate(movies, itemsPerPage, paginationContainer);
 }
 
@@ -86,23 +82,66 @@ async function fetchAndDisplayMovies() {
 
 fetchAndDisplayMovies();
 
+let form=document.getElementById("submit-form")
+let input=document.querySelector("#search-input")
+let btn=document.querySelector("#search-btn")
+let alert_length=document.querySelector("#alert-length")
+let alert_empty=document.querySelector("#alert-empty")
 
+form.onsubmit=function(e) {
+  e.preventDefault();
+  let length=input.value.trim().length;
+  if (length==0) {
+    alert_length.classList.add("d-none");
+    alert_empty.classList.remove("d-none")
+  }
+  else if (length<3) {
+    alert_empty.classList.add("d-none")
+    alert_length.classList.remove("d-none");
+  } else{
+    btn.value="Go Back To HomePage"
+    btn.onclick=function() {
+      window.location.href = 'index.html';
+    }
+  }
+  setTimeout(function(){
+    alert_empty.classList.add("d-none")
+    alert_length.classList.add("d-none");
+  },2000)
+}
 
+form.onblur=function() {
+    alert_empty.classList.add("d-none")
+    alert_length.classList.add("d-none");
+}
 
-document.querySelector("#search-input").addEventListener("keyup", async function() {
+input.onkeyup=function () {
+  let length=input.value.trim().length;
+  if (length==0) {
+    alert_empty.classList.remove("d-none")
+    alert_length.classList.add("d-none");
+  }
+  else if (length<3) {
+    alert_length.classList.remove("d-none")
+    alert_empty.classList.add("d-none");
+
+  }
+  else{
+    alert_empty.classList.add("d-none");
+    alert_length.classList.add("d-none");
+  }
+  setTimeout(function(){
+    alert_empty.classList.add("d-none")
+    alert_length.classList.add("d-none");
+  },2000)
+}
+
+input.addEventListener("keyup", async function() {
   var searchText = this.value.trim().toLowerCase();
-  let messagesContainer = document.getElementById("search-messages");
-  messagesContainer.innerHTML = "";
-
-  if (searchText.trim() === "") {
-    messagesContainer.innerHTML = "Search text cannot be null";
-    return;
-  }
-  if (searchText.length < 3) {
-    messagesContainer.innerHTML = "Minimum length is 3";
-    return;
-  }
-
+  // if (input.value.trim()=="") {
+  //   window.location.href = 'index.html';
+  //   return;
+  // }
   try {
     let movies = await GetMovies();
     const parent = document.querySelector("#main");
@@ -129,15 +168,10 @@ document.querySelector("#search-input").addEventListener("keyup", async function
             </div>
           </div>`;
           parent.innerHTML += movieHTML;
-      }
+   }
+       const pagination = document.querySelector(paginationContainer);
+      pagination.innerHTML = "";
     });
-    
-    if (htmlContent === '') {
-      messagesContainer.innerHTML = "No movies found";
-      return;
-    }
-
-    messagesContainer.innerHTML = htmlContent;
   } catch (error) {
     console.error('Error fetching movies:', error);
   }

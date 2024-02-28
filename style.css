@@ -21,3 +21,76 @@
   background-color: #007bff;
   color: #fff;
 }
+
+
+.navbar {
+  background-color: #333;
+}
+
+.navbar-brand {
+  color: #333; 
+  font-size: 24px;
+}
+
+.navbar-nav .nav-link {
+  color: #a8a0a0;
+  font-size: 18px;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffd700;
+}
+
+.navbar-toggler-icon {
+  background-color: #333; 
+}
+
+.navbar-toggler {
+  border-color: #333;
+}
+
+.form-control {
+  width: 300px;
+}
+
+.btn-outline-success {
+  color: #28a745; 
+  border-color: #28a745;
+}
+
+.btn-outline-success:hover {
+  background-color: #28a746;
+  color: #fff;
+}
+
+.search-messages-container {
+  position: absolute;
+  margin-top: 0;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  background-color: darkgray;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  color: gray;
+}
+
+#go-back-btn {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+}
+
+
