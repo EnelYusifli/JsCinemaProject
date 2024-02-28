@@ -138,10 +138,10 @@ input.onkeyup=function () {
 
 input.addEventListener("keyup", async function() {
   var searchText = this.value.trim().toLowerCase();
-  // if (input.value.trim()=="") {
-  //   window.location.href = 'index.html';
-  //   return;
-  // }
+  if (input.value.trim()=="") {
+    fetchAndDisplayMovies();
+    return;
+  }
   try {
     let movies = await GetMovies();
     const parent = document.querySelector("#main");
